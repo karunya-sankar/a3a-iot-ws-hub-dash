@@ -110,7 +110,7 @@ class IngesterAggregator(object):
             self.dict_current_ws_connections[node_id] = await self.dict_current_ws_sessions[node_id].ws_connect(
                 f'http://localhost:{node_id}{self.url_default_path}'
             )
-            print(f"Connected to {node_id}!")
+            print(f"IngesterAggregator: Connected to edge node {node_id}!")
             return node_id in self.dict_current_ws_connections
 
     async def _node_remove(self, node_id: int) -> bool:
@@ -307,7 +307,8 @@ class DashboardWSService(object):
                     current_data = await self.ref_to_ingester_agg.get_current_aggregates()
                     await ws_resp.send_json({
                         "time": round(time.time()),
-                        "data": current_data
+                        "data": current_data,
+                        "agg_interval": self.ref_to_ingester_agg.period_aggregate_s
                     })
                 except ConnectionResetError:
                     await ws_resp.close()
@@ -360,4 +361,4 @@ if __name__ == '__main__':
             aioweb.get('/hub/dashboard', home_hub.the_dashboard_wss.handle_wss_data_stream)
         ]
     )
-    aioweb.run_app(app)
+    aioweb.run_app(app, port=8080)  # NOTE: change the port number if you have LabView or NI MAX installed.
