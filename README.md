@@ -58,7 +58,8 @@ You should be using aiohttp's Client capabilities (both HTTP and WebSockets) so 
 receiving data while simultaneously waiting for user commands.
 
 You should also design your program visually first. You may use either sequence diagrams, 
-finite state machine diagrams, flowcharts, and/or base system block diagrams.
+finite state machine diagrams, flowcharts, and/or base system block diagrams.  
+**NOTE:** You must include your program design diagram to receive credit for this assignment.
 
 **NOTE:** your interface will need to be multitasked using asyncio.  
 The built-in `input()` function is not a coroutine -- it is blocking.
