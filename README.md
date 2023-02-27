@@ -57,6 +57,9 @@ for a user to issue the following commands:
 You should be using aiohttp's Client capabilities (both HTTP and WebSockets) so that your client can keep
 receiving data while simultaneously waiting for user commands.
 
+You should also design your program visually first. You may use either sequence diagrams, 
+finite state machine diagrams, flowcharts, and/or base system block diagrams.
+
 **NOTE:** your interface will need to be multitasked using asyncio.  
 The built-in `input()` function is not a coroutine -- it is blocking.
 Thus, you must use the `async_input()` coroutine I've already added to `app_hub_dash_client.py`,
@@ -74,6 +77,8 @@ is activated by looking for (ee5450) on the left of the command prompt.
 If the `mamba activate ee5450` command fails, you just need to run `conda init` with the
 Miniforge Prompt window, then "trash" all of the terminals.  You will likely need to 
 enable setup scripts by running `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`.
+
+Then, in each terminal, run the program you want using `python ./{the name of the file here}`.
 
 ### Testing the HTTP functions using Insomnia
 
