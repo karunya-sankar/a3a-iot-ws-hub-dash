@@ -77,7 +77,9 @@ enable setup scripts by running `Set-ExecutionPolicy -Scope CurrentUser RemoteSi
 
 ### Testing the HTTP functions using Insomnia
 
-In Insomnia, you can test the Home Hub
+In Insomnia, you can test the Home Hub by making a new HTTP GET request and using the
+correct URL, along the lines of: `http://localhost:8080/ingester/discover`.  Replace
+the port number with the correct port.
 
 ### Testing the WebSockets functions using Insomnia
 
