@@ -1,6 +1,6 @@
 # A3a: Websockets-based Hub Dashboard Simulation of local IoT system
 
-NOTE: you can view this Markdown (.md) file in the correct formatting using the "preview button" in the top-right corner in Visual Studio Code.
+**NOTE:** you can view this Markdown (.md) file in the correct formatting using the "preview button" in the top-right corner in Visual Studio Code.  Read the whole document before you continue.
 
 ## Overview
 
@@ -22,6 +22,7 @@ in the not-so-distant future.
 First, make sure to install:
 1. `psutil` via Miniforge Prompt and the ee5450 env: `mamba install psutil` so that we can 
 do the scans for "service discovery".  
+1. `aioconsole` via Miniforge Prompt and the ee5450 env: `mamba install aioconsole` so that we can easily combine asyncio with user input
 1. Insomnia via: https://insomnia.rest/download
 
 Normally you'd use bleak or whatever Bluetooth Low Energy service 
@@ -41,21 +42,46 @@ exposure to simpler tools that require less work on your end.  Of course,
 if you were working in industry and trying to make a reliable system
 instead of just trying to finish your homework in a couple of weeks
 
-## System components
+## Your Tasks
 
-Here are the different programs that are in this folder:
+It is up to you to create the command-line interface to the Home Hub services, 
+the Home Hub dashboard client (`app_hub_dash_client.py`), so that it is easy 
+for a user to issue the following commands:
+1. Discover edge nodes
+1. Subscribe to an edge node
+1. Unsubscribe from an edge node
+1. List all currently subscribed edge nodes
+1. Display the values from the last five aggregations from the Hub
+1. Quit the client (disconnect from the hub)
 
-App hub client allows us to chose which node to connect to and to do scans
+You should be using aiohttp's Client capabilities (both HTTP and WebSockets) so that your client can keep
+receiving data while simultaneously waiting for user commands.
 
-App iot node simulator runs websockets servers on different ports
+**NOTE:** your interface will need to be multitasked using asyncio.  
+The built-in `input()` function is not a coroutine -- it is blocking.
+Thus, you must use the `async_input()` coroutine I've already added to `app_hub_dash_client.py`,
+which shows how it should be used.
 
-Hub dashboard creates means (averages) of whatever data is ingested
+## Running the IoT simulation system
+### Executing each program using Visual Studio Code
 
-Hub ingester is websockets client to simulate BLE client
+To run the IoT simulation system, you will need to open three different terminal windows.  
+You can click the + icon in the Terminal window in Visual Studio Code to open additional 
+terminals in your workspace.  You will see three terminals appear in the right side of the
+Terminal pane at the bottom half of your screen.  In each one, make sure the ee5450 environment
+is activated by looking for (ee5450) on the left of the command prompt.
 
-## Tasks TODO
+If the `mamba activate ee5450` command fails, you just need to run `conda init` with the
+Miniforge Prompt window, then "trash" all of the terminals.  You will likely need to 
+enable setup scripts by running `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`.
 
-It is up to you to create the following improvements to the system:
-    1. sdfsefdsf
-    1. ssdafsdfa
-    1. asdfsdfds
+### Testing the HTTP functions using Insomnia
+
+
+
+### Testing the WebSockets functions using Insomnia
+
+In Insomnia, you can test the IoT node simulator by making a new WebSocket request 
+and using the URL format: `ws://localhost:8090/data`, where you can replace 8090 with
+8091, 8092, etc. to test a specific node between 8090 and 8099 (the program simulates 
+9 nodes by default).
