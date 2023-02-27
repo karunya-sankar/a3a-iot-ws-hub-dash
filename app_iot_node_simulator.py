@@ -1,4 +1,11 @@
+"""
+IoT Edge Node Simulator
+Copyright 2023 by Y. Curtis Wang
 
+This application simulates a set of IoT edge nodes by creating WebSockets servers that
+produce randomized data.
+
+"""
 
 import asyncio
 import time

@@ -1,4 +1,7 @@
 """
+IoT Home Hub Server Simulator
+Copyright 2023 by Y. Curtis Wang
+
 This server application is meant to be run on the
     local home hub.  It serves as an interface
     between the edge sensor nodes and the homeowner's
