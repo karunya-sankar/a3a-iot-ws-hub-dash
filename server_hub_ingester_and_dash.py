@@ -31,6 +31,7 @@ import psutil as psu
 import aiohttp.web as aioweb
 import aiohttp as aioh
 from contextlib import suppress
+import time
 from typing import Dict, List
 
 
@@ -304,7 +305,10 @@ class DashboardWSService(object):
             if the_count % self.count_pub == 0:
                 try:
                     current_data = await self.ref_to_ingester_agg.get_current_aggregates()
-                    await ws_resp.send_json(current_data)
+                    await ws_resp.send_json({
+                        "time": round(time.time()),
+                        "data": current_data
+                    })
                 except ConnectionResetError:
                     await ws_resp.close()
                     return ws_resp

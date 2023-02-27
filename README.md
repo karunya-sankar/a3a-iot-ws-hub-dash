@@ -77,7 +77,7 @@ enable setup scripts by running `Set-ExecutionPolicy -Scope CurrentUser RemoteSi
 
 ### Testing the HTTP functions using Insomnia
 
-
+In Insomnia, you can test the Home Hub
 
 ### Testing the WebSockets functions using Insomnia
 
@@ -85,3 +85,7 @@ In Insomnia, you can test the IoT node simulator by making a new WebSocket reque
 and using the URL format: `ws://localhost:8090/data`, where you can replace 8090 with
 8091, 8092, etc. to test a specific node between 8090 and 8099 (the program simulates 
 9 nodes by default).
+
+You can test the Home Hub dashboard by making a new WebSocket request and using the
+URL format: `ws://localhost:8080/hub/dashboard`.  As long as you don't disconnect
+within Insomnia, you will see values from different nodes come up.
