@@ -364,4 +364,4 @@ if __name__ == '__main__':
             aioweb.get('/hub/dashboard', home_hub.the_dashboard_wss.handle_wss_data_stream)
         ]
     )
-    aioweb.run_app(app, port=8080)  # NOTE: change the port number if you have LabView or NI MAX installed.
+    aioweb.run_app(app, port=8081)  # NOTE: change the port number if you have LabView or NI MAX installed.
